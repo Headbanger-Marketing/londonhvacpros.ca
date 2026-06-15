@@ -182,7 +182,7 @@ def build_service(slug, data):
   <div class="container">
     {crumbs([("Home","/"),("Services","/services/"),(nav_label,"")])}
     <span class="eyebrow on-dark">{data["kicker"]}</span>
-    <h1>{SITE_NAME} — {data["h1"]}</h1>
+    <h1>London HVAC Pros — {SITE_NAME} — {data["h1"]}</h1>
     <p>{data["intro"]}</p>
     <div class="page-hero__cta">
       <a class="btn btn-primary btn-lg" href="#quote">Get a Free Quote</a>
