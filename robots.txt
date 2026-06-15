@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://londonhvacpros.ca/sitemap.xml
