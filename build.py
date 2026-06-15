@@ -93,11 +93,7 @@ LOGO_MARK = '''<svg class="brand__mark" viewBox="0 0 48 48" fill="none" xmlns="h
 def brand(footer=False):
     cls = "brand footer-brand" if footer else "brand"
     return f'''<a class="{cls}" href="/" aria-label="{SITE_NAME} home">
-      {LOGO_MARK}
-      <span class="brand__text">
-        <span class="brand__name">{CITY}</span>
-        <span class="brand__tag">HVAC Pros</span>
-      </span>
+      <img class="brand__logo" src="/assets/img/logo.png" alt="{SITE_NAME}" loading="eager" decoding="async">
     </a>'''
 
 # ------------------------------------------------------------------ NAV / SERVICES DATA
@@ -123,7 +119,6 @@ def nav_links(active=""):
         <a class="nav__link" href="/services/"{cur('services')} aria-haspopup="true" aria-expanded="false">Services {icon('chev-down',size=15)}</a>
         <div class="dropdown">{drop}</div>
       </div>
-      <a class="nav__link" href="/blog/"{cur('blog')}>Blog</a>
       <a class="nav__link" href="/contact/"{cur('contact')}>Contact</a>
       <div class="nav__cta">
         <a class="btn btn-primary" href="/contact/">Get a Free Quote</a>
@@ -137,7 +132,7 @@ def header(active=""):
       <span class="topbar__item">{icon('clock',size=15)} 24/7 Emergency Service</span>
       <span class="topbar__item topbar__item--areas">{icon('pin',size=15)} Serving {CITY} &amp; {COUNTY}</span>
     </div>
-    <a class="topbar__right" href="tel:{PHONE_TEL}">{icon('phone',size=15)} Call {PHONE_DISPLAY}</a>
+    <a class="topbar__right" href="/contact/">{icon('check-sm',size=15)} Free, No-Obligation Quotes</a>
   </div>
 </div>
 <header class="site-header">
@@ -160,7 +155,7 @@ def footer():
     <div class="footer-grid">
       <div>
         {brand(footer=True)}
-        <p class="footer-about">Honest, dependable heating and cooling for {CITY}, Ontario and the surrounding {COUNTY} communities. Family-run, licensed, and available 24/7.</p>
+        <p class="footer-about">Honest, dependable heating and cooling for {CITY}, Ontario and the surrounding {COUNTY} communities. Licensed, insured, and available 24/7.</p>
       </div>
       <div>
         <h4>Company</h4>
@@ -192,9 +187,8 @@ def footer():
     </div>
   </div>
 </footer>
-<div class="mobile-bar">
-  <a class="btn btn-secondary" href="tel:{PHONE_TEL}">{icon('phone',size=18)} Call Now</a>
-  <a class="btn btn-primary" href="/contact/">{icon('send',size=18)} Free Quote</a>
+<div class="mobile-bar mobile-bar--single">
+  <a class="btn btn-primary" href="/contact/">{icon('send',size=18)} Get a Free Quote</a>
 </div>
 <script src="/assets/js/main.js" defer></script>'''
 
@@ -245,7 +239,6 @@ def quote_form(heading="Get a Free Quote", sub="No obligation. Fast response. Ho
       <span class="error-text">Tell us briefly what's going on.</span>
     </div>
     <button class="btn btn-primary btn-lg btn-block" type="submit">{icon('send',size=18)} Request My Free Quote</button>
-    <p class="form-note">{icon('shield',size=15)} Your details stay private. We never share your information.</p>
   </div>
 </form>'''
 
@@ -390,7 +383,7 @@ def areas_section():
     return f'''<section class="section bg-soft">
   <div class="container">
     <div class="section-head reveal">
-      <span class="eyebrow">Proudly Local</span>
+      <span class="eyebrow">Service Area</span>
       <h2>Serving {CITY} &amp; Surrounding Communities</h2>
       <p>We provide fast, reliable HVAC service throughout {CITY} and {COUNTY}. If you don't see your town listed, give us a call — chances are we cover it.</p>
     </div>

@@ -105,10 +105,35 @@ SVC = {
  },
 }
 
+# slug -> recovered WordPress photo (full-size files only). Where no matching
+# photo exists on this site, fall back to a technician/contractor image so no
+# <img> src is ever broken. (width, height) are the real pixel dimensions.
+SVC_PHOTO = {
+ "furnace-repair": ("furnace-repair-1536x1024-2.png", 1536, 1024,
+   "High-efficiency furnace installed by London HVAC Pros in a London, Ontario home"),
+ "ac-repair": ("London-Ontario-HVAC-technician.png", 1350, 1350,
+   "London HVAC Pros technician servicing a central air conditioner in London, Ontario"),
+ "ductless-ac-installation": ("London-Ontario-HVAC-Contractor.png", 1350, 1350,
+   "London HVAC Pros contractor installing a ductless mini-split in a London, Ontario home"),
+ "heat-pump-repair-installation": ("London-Ontario-HVAC-technician.png", 1350, 1350,
+   "London HVAC Pros technician installing a cold-climate heat pump in London, Ontario"),
+ "fireplace-installation": ("London-Ontario-HVAC-Contractor.png", 1350, 1350,
+   "London HVAC Pros contractor completing a fireplace installation in London, Ontario"),
+ "thermostat-repair-replacement": ("London-Ontario-HVAC-technician.png", 1350, 1350,
+   "London HVAC Pros technician installing a smart thermostat in a London, Ontario home"),
+ "duct-cleaning": ("Why-Routine-Maintenance-Improves-Indoor-Air-Quality-and-System-Lifespan.png", 925, 540,
+   "Clean ductwork and improved indoor air quality from London HVAC Pros duct cleaning in London, Ontario"),
+}
+
+def service_photo(slug):
+    fn, w, h, alt = SVC_PHOTO[slug]
+    return (f'<img class="svc-photo reveal" src="/assets/img/wp/{fn}" '
+            f'width="{w}" height="{h}" loading="lazy" decoding="async" alt="{alt}">')
+
 REVIEW_POOL = [
   ("They had our furnace running again the same day — on one of the coldest nights of the year. Fast and professional.","Mya C.","London"),
   ("Fixed the problem quickly and explained everything clearly. Great service from start to finish.","Daniel P.","St. Thomas"),
-  ("Reliable, affordable, and trustworthy. I won't call anyone else for HVAC.","Aisha N.","Strathroy"),
+  ("Reliable, affordable, and straightforward. I won't call anyone else for HVAC.","Aisha N.","Strathroy"),
   ("Excellent response time and very knowledgeable technicians. Our home was comfortable again by morning.","Mark Z.","Dorchester"),
   ("Professional service, fair pricing, and no surprises. They made the whole process simple and stress-free.","Kevin H.","Komoka"),
   ("Friendly staff and outstanding workmanship. Our system runs better than ever after their visit.","Jennifer L.","Aylmer"),
@@ -170,6 +195,7 @@ def build_service(slug, data):
   <div class="container">
     <div class="split">
       <div>
+        {service_photo(slug)}
         <span class="eyebrow">Why Homeowners Call Us</span>
         <div class="callout reveal" style="margin-bottom:24px">
           <h3>{data["problem_h"]}</h3>
@@ -206,7 +232,7 @@ def build_service(slug, data):
 </section>
 
 {cta_band(title="We Can Help Solve Your "+nav_label.replace('&amp;','&')+" Needs",
-          text="Don't let a comfort problem disrupt your home. Get fast, reliable service from London's trusted local HVAC team.")}
+          text="Don't let a comfort problem disrupt your home. Get fast, reliable service from London's licensed HVAC team.")}
 '''
     out += page_end()
     write(url, out)
@@ -292,7 +318,7 @@ def build_home():
     <div class="trust-strip__item"><span class="ic">{icon('clock',size=26)}</span><div><b>24/7</b><span>Emergency service</span></div></div>
     <div class="trust-strip__item"><span class="ic">{icon('shield',size=26)}</span><div><b>Licensed</b><span>&amp; fully insured</span></div></div>
     <div class="trust-strip__item"><span class="ic">{icon('dollar',size=26)}</span><div><b>Free</b><span>No-obligation quotes</span></div></div>
-    <div class="trust-strip__item"><span class="ic">{icon('users',size=26)}</span><div><b>Local</b><span>Family-run &amp; trusted</span></div></div>
+    <div class="trust-strip__item"><span class="ic">{icon('shield',size=26)}</span><div><b>Licensed</b><span>Fully licensed &amp; insured</span></div></div>
   </div>
 </section>
 
@@ -310,18 +336,8 @@ def build_home():
         </div>
       </div>
       <div class="split__media reveal d1">
-        <div class="media-panel">
-          <div class="media-panel__row">
-            <div class="media-chip warm"><span class="ic">{icon('flame',size=24)}</span><b>Heating</b><span>Furnaces, heat pumps &amp; fireplaces</span></div>
-            <div class="media-chip cool"><span class="ic">{icon('snowflake',size=24)}</span><b>Cooling</b><span>Central air &amp; ductless systems</span></div>
-            <div class="media-chip cool"><span class="ic">{icon('droplets',size=24)}</span><b>Air Quality</b><span>Duct cleaning &amp; ventilation</span></div>
-            <div class="media-chip warm"><span class="ic">{icon('gauge',size=24)}</span><b>Controls</b><span>Smart &amp; programmable thermostats</span></div>
-            <div class="media-chip media-chip--wide cool" style="display:flex;align-items:center;gap:14px">
-              <span class="ic" style="margin:0">{icon('headset',size=24)}</span>
-              <div><b>Real local technicians, on call 24/7</b><span>Serving London &amp; Middlesex County, every day of the year</span></div>
-            </div>
-          </div>
-        </div>
+        <img class="media-photo" src="/assets/img/wp/London-Ontario-HVAC-technician.png" width="1350" height="1350" loading="lazy" decoding="async" alt="London HVAC Pros technician installing a high-efficiency heating system in a London, Ontario home">
+        <img class="badge-img" style="margin-top:18px" src="/assets/img/wp/quality-guarantee.png" width="320" height="320" loading="lazy" decoding="async" alt="Satisfaction guarantee">
       </div>
     </div>
   </div>
@@ -361,7 +377,7 @@ def build_home():
     <div class="section-head reveal">
       <span class="eyebrow">Testimonials</span>
       <h2>What London Homeowners Are Saying</h2>
-      <p>We're proud to be the heating and cooling partner our neighbours trust and recommend.</p>
+      <p>We're proud to be the heating and cooling partner London homeowners recommend.</p>
     </div>
     <div class="reviews">{revs}</div>
   </div>
@@ -445,7 +461,7 @@ def build_services_index():
 def build_about():
     out = head(
       title=f"About Us | {SITE_NAME}",
-      desc=f"London HVAC Pros is a local, family-run HVAC company serving London, Ontario with honest, reliable heating and cooling care. Meet the team.",
+      desc=f"London HVAC Pros is a licensed, insured HVAC company serving London, Ontario with honest, reliable heating and cooling care. Meet the team.",
       path="/about/",
       schema_blocks=[schema_localbusiness(), schema_breadcrumb([("Home","/"),("About","/about/")])])
     out += f'''
@@ -453,8 +469,8 @@ def build_about():
   <div class="container">
     {crumbs([("Home","/"),("About","")])}
     <span class="eyebrow on-dark">About Us</span>
-    <h1>A Local Tradition of Home Comfort</h1>
-    <p>We aren't just technicians — we're your neighbours, committed to keeping London families comfortable through every season.</p>
+    <h1>Committed to London Home Comfort</h1>
+    <p>We aren't just technicians. We're your neighbours, committed to keeping London families comfortable through every season.</p>
   </div>
 </section>
 
@@ -464,13 +480,13 @@ def build_about():
       <div class="reveal">
         <span class="eyebrow">Our Story</span>
         <h2>People Over Profits, Season After Season</h2>
-        <p>At London HVAC Pros, we believe every family deserves a comfortable, healthy home. As a family-oriented business based in London, Ontario, our mission is simple: keep your home comfortable through every season with the same high standard of care we'd expect for our own households.</p>
+        <p>At London HVAC Pros, we believe every household deserves a comfortable, healthy home. As an HVAC company based in London, Ontario, our mission is simple: keep your home comfortable through every season with the same high standard of care we'd expect for our own households.</p>
         <p>Our journey began with one goal — to provide honest, transparent home services that put people first. We know that when your furnace or air conditioner fails, it's more than an inconvenience; it's a disruption to your family's peace of mind. That's why we've built our reputation on being a reliable HVAC company that delivers tailored solutions with a personal touch.</p>
       </div>
       <div class="split__media reveal d1">
         <div class="media-panel">
           <div class="media-panel__row">
-            <div class="media-chip warm"><span class="ic">{icon('users',size=24)}</span><b>Family-Run</b><span>Locally owned &amp; operated</span></div>
+            <div class="media-chip warm"><span class="ic">{icon('shield',size=24)}</span><b>Licensed &amp; Insured</b><span>Qualified local technicians</span></div>
             <div class="media-chip cool"><span class="ic">{icon('shield',size=24)}</span><b>Licensed</b><span>Insured &amp; certified techs</span></div>
             <div class="media-chip cool"><span class="ic">{icon('leaf',size=24)}</span><b>Efficient</b><span>Energy-saving systems</span></div>
             <div class="media-chip warm"><span class="ic">{icon('clock',size=24)}</span><b>Available</b><span>24/7 emergency service</span></div>
@@ -485,7 +501,7 @@ def build_about():
   <div class="container">
     <div class="split reverse">
       <div class="split__media reveal">
-        <div class="callout"><h3>Why London Families Trust Us</h3><p>We specialize in everything from high-efficiency furnace installation to complex central-air diagnostics. Our team handles both residential and light-commercial systems, so whether you're at home or at work, your environment stays perfectly regulated.</p></div>
+        <div class="callout"><h3>Why London Families Choose Us</h3><p>We specialize in everything from high-efficiency furnace installation to complex central-air diagnostics. Our team handles both residential and light-commercial systems, so whether you're at home or at work, your environment stays perfectly regulated.</p></div>
       </div>
       <div class="reveal d1">
         <span class="eyebrow">Our Commitment</span>
@@ -541,7 +557,7 @@ def build_contact():
         <ul class="feature-list" style="margin-top:24px">
           {feature_item('clock','Fast Response','We prioritise emergency calls and aim to respond the same day.')}
           {feature_item('dollar','Free, No-Obligation Quotes','Know your options and pricing before committing to anything.')}
-          {feature_item('shield','Licensed &amp; Insured','Professional, certified service you can trust in your home.')}
+          {feature_item('shield','Licensed &amp; Insured','Professional, certified service you can rely on in your home.')}
         </ul>
       </div>
       <div class="split__media reveal d1">{quote_form(heading="Get a Free Quote", sub="Tell us about your heating or cooling issue.", id_suffix="contact")}</div>
@@ -654,7 +670,7 @@ def article_shell(p, body_html):
     <article class="article reveal">{body_html}
       <div class="note-banner" style="margin-top:30px;background:var(--bg-alt);border:1px solid var(--line);color:var(--body)">
         <strong style="color:var(--navy-900)">Need help now?</strong>
-        <a href="/contact/">Request a free quote</a> and a local London technician will get back to you fast — we're here 24/7.
+        <a href="/contact/">Request a free quote</a> and a London technician will get back to you fast. We're here 24/7.
       </div>
     </article>
   </div>
@@ -700,7 +716,7 @@ def blog_bodies():
 <p>Many service calls happen in the middle of a heat wave or during a cold snap. By then, the system has already been under stress for weeks. Preventative maintenance is far more affordable — and far less stressful — than emergency repairs.</p>
 <p>Scheduling service before each major season gives you peace of mind, knowing your system has been inspected, cleaned, and tested by a professional.</p>
 <h2>Book Your Service With London HVAC Pros</h2>
-<p>We're proud to serve homeowners throughout London and the surrounding Middlesex County area. As a local, family-operated company, we focus on honest service and long-term relationships with our customers. If it has been more than a year since your last HVAC service, now is the time to schedule.</p>
+<p>We're proud to serve homeowners throughout London and the surrounding Middlesex County area. We focus on honest service and long-term relationships with our customers. If it has been more than a year since your last HVAC service, now is the time to schedule.</p>
 ''',
  "signs-your-furnace-needs-repair-before-a-london-winter": '''
 <p class="lead">Winter in London, Ontario is serious business. When temperatures fall well below freezing and the wind comes off Lake Erie, your furnace becomes the heart of your home. It keeps your family warm, protects your plumbing from freezing, and makes everyday life comfortable.</p>
@@ -723,7 +739,7 @@ def blog_bodies():
 <h2>Why Acting Early Matters</h2>
 <p>Putting off furnace repairs can lead to a complete system breakdown during freezing temperatures. Emergency repairs in the middle of winter are not only stressful but can also be more costly. Taking care of small repairs now helps protect your furnace, extend its lifespan, and give you peace of mind before the coldest months arrive.</p>
 <h2>Need Furnace Repair in London, Ontario?</h2>
-<p>At London HVAC Pros, we understand how important reliable heat is for your home and family. As a local, family-operated HVAC company, we provide fast, dependable furnace repair throughout London and nearby Middlesex County communities. If you've noticed any of these warning signs, don't wait for winter to put your system to the test.</p>
+<p>At London HVAC Pros, we understand how important reliable heat is for your home and family. As a licensed, insured HVAC company, we provide fast, dependable furnace repair throughout London and nearby Middlesex County communities. If you've noticed any of these warning signs, don't wait for winter to put your system to the test.</p>
 ''',
  "why-your-air-conditioner-struggles-during-humid-london-summers": '''
 <p class="lead">If your air conditioner seems to run all day but your home still feels sticky and uncomfortable, you're not imagining it. Summers in London, Ontario aren't just hot — they're humid. Sitting close to Lake Erie, our area sees moisture levels that play a major role in how comfortable your home feels, even when the temperature looks fine.</p>
@@ -747,7 +763,7 @@ def blog_bodies():
 <h2>Don't Let Your System Run Nonstop</h2>
 <p>If your air conditioner is running constantly but your home still feels uncomfortable, it's a sign something needs attention. Letting the system run nonstop not only increases your energy bills but can also shorten the lifespan of the equipment. Addressing the issue early can prevent larger repairs later in the season.</p>
 <h2>Schedule AC Service in London Today</h2>
-<p>At London HVAC Pros, we understand how challenging Ontario summers can be. As a family-owned and operated HVAC company, we provide honest, reliable air conditioning repair and maintenance throughout London and the surrounding Middlesex County area. If your home feels humid or your AC is struggling to keep up, we'll help restore comfort and keep your cooling system running efficiently all summer long.</p>
+<p>At London HVAC Pros, we understand how challenging Ontario summers can be. As a licensed, insured HVAC company, we provide honest, reliable air conditioning repair and maintenance throughout London and the surrounding Middlesex County area. If your home feels humid or your AC is struggling to keep up, we'll help restore comfort and keep your cooling system running efficiently all summer long.</p>
 ''',
     }
 
@@ -775,7 +791,7 @@ def build_privacy():
       <h2>How We Use Your Information</h2>
       <p>We use the information you provide to respond to your enquiry, schedule and deliver services, provide quotes, and follow up about your home comfort needs. We do not sell or rent your personal information to third parties.</p>
       <h2>How We Protect Your Information</h2>
-      <p>We take reasonable measures to protect the personal information you share with us against loss, theft, and unauthorized access. Information is shared only with team members and trusted service partners who need it to serve you.</p>
+      <p>We take reasonable measures to protect the personal information you share with us against loss, theft, and unauthorized access. Information is shared only with team members and service partners who need it to serve you.</p>
       <h2>Cookies &amp; Analytics</h2>
       <p>Our website may use cookies and similar technologies to improve your browsing experience and understand site usage. You can disable cookies through your browser settings, though some features may not function as intended.</p>
       <h2>Your Choices</h2>
