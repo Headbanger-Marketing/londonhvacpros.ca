@@ -131,7 +131,7 @@ def service_photo(slug):
             f'width="{w}" height="{h}" loading="lazy" decoding="async" alt="{alt}">')
 
 REVIEW_POOL = [
-  ("They had our furnace running again the same day — on one of the coldest nights of the year. Fast and professional.","Mya C.","London"),
+  ("They had our furnace running again the same day, on one of the coldest nights of the year. Fast and professional.","Mya C.","London"),
   ("Fixed the problem quickly and explained everything clearly. Great service from start to finish.","Daniel P.","St. Thomas"),
   ("Reliable, affordable, and straightforward. I won't call anyone else for HVAC.","Aisha N.","Strathroy"),
   ("Excellent response time and very knowledgeable technicians. Our home was comfortable again by morning.","Mark Z.","Dorchester"),
@@ -172,7 +172,7 @@ def build_service(slug, data):
 
     out = head(
       title=title,
-      desc=f"{SITE_NAME} — {data['meta']}", path=url, og_type="article",
+      desc=f"{SITE_NAME}, {data['meta']}", path=url, og_type="article",
       schema_blocks=[schema_localbusiness(),
                      schema_breadcrumb(breadcrumb_items),
                      schema_service(nav_label.replace('&amp;','and'), data["intro"], url)])
@@ -182,7 +182,7 @@ def build_service(slug, data):
   <div class="container">
     {crumbs([("Home","/"),("Services","/services/"),(nav_label,"")])}
     <span class="eyebrow on-dark">{data["kicker"]}</span>
-    <h1>{SITE_NAME} — {data["h1"]}</h1>
+    <h1>{SITE_NAME}, {data["h1"]}</h1>
     <p>{data["intro"]}</p>
     <div class="page-hero__cta">
       <a class="btn btn-primary btn-lg" href="#quote">Get a Free Quote</a>
@@ -204,7 +204,7 @@ def build_service(slug, data):
         <ul class="feature-list">{feats}</ul>
       </div>
       <div class="split__media">
-        <div style="position:sticky;top:96px">{quote_form(heading="Request Service", sub="Tell us what's going on — we'll get back to you fast.", id_suffix=slug)}</div>
+        <div style="position:sticky;top:96px">{quote_form(heading="Request Service", sub="Tell us what's going on, we'll get back to you fast.", id_suffix=slug)}</div>
       </div>
     </div>
   </div>
@@ -240,11 +240,11 @@ def build_service(slug, data):
 # ============================================================ HOME
 HOME_SERVICES = [
  ("flame","Furnace Installation &amp; Repair","Keep your home warm all winter with expert furnace repair and installation. From emergency calls to routine maintenance, we keep your system safe and efficient.","/services/furnace-repair/"),
- ("snowflake","AC Installation &amp; Repair","Beat the heat with reliable AC repair for central and ductless systems — fast diagnostics, tune-ups, and replacements to keep you cool all summer.","/services/ac-repair/"),
+ ("snowflake","AC Installation &amp; Repair","Beat the heat with reliable AC repair for central and ductless systems, fast diagnostics, tune-ups, and replacements to keep you cool all summer.","/services/ac-repair/"),
  ("refresh","Heat Pumps","Year-round, energy-efficient heating and cooling. We help you select, install, and maintain heat pump systems that lower energy costs and boost comfort.","/services/heat-pump-repair-installation/"),
  ("air-vent","Duct Cleaning","Remove dust, allergens, and debris from your ductwork to improve airflow, system efficiency, and the indoor air your family breathes.","/services/duct-cleaning/"),
  ("gauge","Thermostats","Smart and programmable thermostat repair and replacement for better temperature control, scheduling, and real energy savings.","/services/thermostat-repair-replacement/"),
- ("fan","Ductless AC Installation","Ideal for homes without ductwork — targeted, energy-efficient cooling and heating designed precisely around your space.","/services/ductless-ac-installation/"),
+ ("fan","Ductless AC Installation","Ideal for homes without ductwork, targeted, energy-efficient cooling and heating designed precisely around your space.","/services/ductless-ac-installation/"),
 ]
 
 HOME_FAQ = [
@@ -285,8 +285,8 @@ def build_home():
     blog_cards = build_blog_cards(BLOG)
 
     out = head(
-      title=f"{SITE_NAME} — HVAC Company in {CITY}, ON",
-      desc=f"London HVAC Pros provides honest, efficient, dependable HVAC service in {CITY}, Ontario — furnace & AC repair, heat pumps & more. Call {PHONE_DISPLAY} for a free quote.",
+      title=f"{SITE_NAME} | HVAC Company in {CITY}, ON",
+      desc=f"London HVAC Pros provides honest, efficient, dependable HVAC service in {CITY}, Ontario, furnace & AC repair, heat pumps & more. Call {PHONE_DISPLAY} for a free quote.",
       path="/",
       schema_blocks=[schema_localbusiness(), schema_faq(HOME_FAQ)])
 
@@ -296,7 +296,7 @@ def build_home():
   <div class="container">
     <div class="hero__copy reveal">
       <span class="eyebrow on-dark">{CITY}'s High-Efficiency HVAC Installers</span>
-      <h1>London HVAC Pros — New Furnace, AC &amp; Heat Pump Installs in <span class="accent">{CITY}, ON</span></h1>
+      <h1>London HVAC Pros, New Furnace, AC &amp; Heat Pump Installs in <span class="accent">{CITY}, ON</span></h1>
       <p class="hero__sub">{SITE_NAME} designs and installs high-efficiency heating and cooling systems for homes across {CITY}, Ontario and {COUNTY}. Right-sized equipment, certified workmanship, and the rebate guidance to make the upgrade pay off.</p>
       <div class="hero__cta">
         <a class="btn btn-primary btn-lg" href="#quote">Get a Free Quote</a>
@@ -384,7 +384,7 @@ def build_home():
 </section>
 
 {cta_band(title="Ready to Improve Your Home Comfort?",
-          text="No matter the make or model, our experts have the tools and experience to handle any furnace, air conditioner, heat pump, or ventilation issue — fast.")}
+          text="No matter the make or model, our experts have the tools and experience to handle any furnace, air conditioner, heat pump, or ventilation issue, fast.")}
 
 <section class="section">
   <div class="container">
@@ -424,7 +424,7 @@ def build_services_index():
       </article>''' for s in SERVICES)
     out = head(
       title=f"HVAC Services in {CITY}, ON | {SITE_NAME}",
-      desc=f"Full-service heating & cooling in London, Ontario — furnace & AC repair, heat pumps, ductless AC, thermostats & duct cleaning. Free quotes.",
+      desc=f"Full-service heating & cooling in London, Ontario, furnace & AC repair, heat pumps, ductless AC, thermostats & duct cleaning. Free quotes.",
       path="/services/",
       schema_blocks=[schema_localbusiness(), schema_breadcrumb([("Home","/"),("Services","/services/")])])
     out += f'''
@@ -448,7 +448,7 @@ def build_services_index():
     <div class="steps">
       <div class="step reveal"><div class="step__ic">{icon('clock',size=26)}</div><div class="step__num"></div><h3>24/7 Emergency Service</h3><p>Heating and cooling failures don't wait for business hours. Our team is on call around the clock for London and Middlesex County.</p></div>
       <div class="step reveal d1"><div class="step__ic">{icon('shield',size=26)}</div><div class="step__num"></div><h3>Licensed &amp; Insured</h3><p>Every technician is fully licensed, insured, and trained to service all major HVAC brands and high-efficiency systems.</p></div>
-      <div class="step reveal d2"><div class="step__ic">{icon('dollar',size=26)}</div><div class="step__num"></div><h3>Honest, Upfront Pricing</h3><p>Free, no-obligation quotes and clear pricing before any work begins — no surprises, no pressure, no upselling.</p></div>
+      <div class="step reveal d2"><div class="step__ic">{icon('dollar',size=26)}</div><div class="step__num"></div><h3>Honest, Upfront Pricing</h3><p>Free, no-obligation quotes and clear pricing before any work begins, no surprises, no pressure, no upselling.</p></div>
     </div>
   </div>
 </section>
@@ -481,7 +481,7 @@ def build_about():
         <span class="eyebrow">Our Story</span>
         <h2>People Over Profits, Season After Season</h2>
         <p>At London HVAC Pros, we believe every household deserves a comfortable, healthy home. As an HVAC company based in London, Ontario, our mission is simple: keep your home comfortable through every season with the same high standard of care we'd expect for our own households.</p>
-        <p>Our journey began with one goal — to provide honest, transparent home services that put people first. We know that when your furnace or air conditioner fails, it's more than an inconvenience; it's a disruption to your family's peace of mind. That's why we've built our reputation on being a reliable HVAC company that delivers tailored solutions with a personal touch.</p>
+        <p>Our journey began with one goal, to provide honest, transparent home services that put people first. We know that when your furnace or air conditioner fails, it's more than an inconvenience; it's a disruption to your family's peace of mind. That's why we've built our reputation on being a reliable HVAC company that delivers tailored solutions with a personal touch.</p>
       </div>
       <div class="split__media reveal d1">
         <div class="media-panel">
@@ -507,7 +507,7 @@ def build_about():
         <span class="eyebrow">Our Commitment</span>
         <h2>Comfort, Integrity &amp; Indoor Air Quality</h2>
         <p>We take pride in our expertise in energy-efficient air conditioning and modern heating, helping our community reduce its carbon footprint while saving on monthly utility bills.</p>
-        <p>When you choose us, you aren't just getting a repair service — you're joining a community of satisfied homeowners who value quality, integrity, and a heating and cooling partner who genuinely cares.</p>
+        <p>When you choose us, you aren't just getting a repair service, you're joining a community of satisfied homeowners who value quality, integrity, and a heating and cooling partner who genuinely cares.</p>
         <ul class="feature-list">
           {feature_item('check-sm','Honest, Transparent Pricing','Free quotes and clear estimates before any work starts.')}
           {feature_item('check-sm','Trained, Courteous Technicians','On-time, tidy, and respectful of your home.')}
@@ -538,7 +538,7 @@ def build_contact():
     {crumbs([("Home","/"),("Contact","")])}
     <span class="eyebrow on-dark">Contact Us</span>
     <h1>Let's Get Your Comfort Back on Track</h1>
-    <p>Is your air conditioner making a strange noise? Ready to upgrade your furnace before winter? Whatever your home comfort need, the London HVAC Pros team is ready to help — without the stress.</p>
+    <p>Is your air conditioner making a strange noise? Ready to upgrade your furnace before winter? Whatever your home comfort need, the London HVAC Pros team is ready to help, without the stress.</p>
   </div>
 </section>
 
@@ -570,7 +570,7 @@ def build_contact():
     <div class="section-head reveal">
       <span class="eyebrow">Service Hours</span>
       <h2>We're Here Whenever You Need Us</h2>
-      <p>Heating and cooling emergencies don't keep a schedule — and neither do we.</p>
+      <p>Heating and cooling emergencies don't keep a schedule, and neither do we.</p>
     </div>
     <div class="info-grid">
       <div class="info-card center reveal"><span class="ic" style="margin-inline:auto">{icon('clock',size=26)}</span><h3>24 Hours a Day</h3><p style="color:var(--muted)">Round-the-clock emergency service</p></div>
@@ -591,7 +591,7 @@ BLOG = [
   "title":"How Often Should You Service Your HVAC System in London, Ontario?",
   "seo_title":"How Often to Service Your HVAC in London, ON",
   "date":"2026-01-12","date_h":"January 12, 2026","img":"cool","icon":"calendar",
-  "excerpt":"London's real seasons push your HVAC system hard. Here's how often you should service your furnace and AC — and why twice a year is the sweet spot.",
+  "excerpt":"London's real seasons push your HVAC system hard. Here's how often you should service your furnace and AC, and why twice a year is the sweet spot.",
   "meta":"How often should you service your HVAC system in London, Ontario? Learn the ideal furnace and AC maintenance schedule for our climate from local experts.",
   "body":None},
  {"slug":"signs-your-furnace-needs-repair-before-a-london-winter",
@@ -599,13 +599,13 @@ BLOG = [
   "seo_title":"Signs Your Furnace Needs Repair Before Winter",
   "date":"2026-02-15","date_h":"February 15, 2026","img":"warm","icon":"flame",
   "excerpt":"Don't wait for the coldest night of the year. Here are the most common warning signs your furnace needs repair before a London winter sets in.",
-  "meta":"Five warning signs your furnace needs repair before a London, Ontario winter — strange noises, uneven heat, rising bills and more. Stay warm and safe.",
+  "meta":"Five warning signs your furnace needs repair before a London, Ontario winter, strange noises, uneven heat, rising bills and more. Stay warm and safe.",
   "body":None},
  {"slug":"why-your-air-conditioner-struggles-during-humid-london-summers",
   "title":"Why Your Air Conditioner Struggles During Humid London Summers",
   "seo_title":"Why Your AC Struggles in Humid London Summers",
   "date":"2026-03-09","date_h":"March 9, 2026","img":"cool","icon":"droplets",
-  "excerpt":"If your AC runs all day but your home still feels sticky, humidity is likely the culprit. Here's why — and what you can do about it.",
+  "excerpt":"If your AC runs all day but your home still feels sticky, humidity is likely the culprit. Here's why, and what you can do about it.",
   "meta":"Why does your air conditioner struggle in humid London summers? Learn how humidity affects cooling and what AC service near Lake Erie can do to help.",
   "body":None},
 ]
@@ -628,7 +628,7 @@ def build_blog_index():
     cards = build_blog_cards(BLOG, limit=len(BLOG))
     out = head(
       title=f"HVAC Tips &amp; Home Comfort Blog | {SITE_NAME}",
-      desc="Practical heating and cooling advice for London, Ontario homeowners — maintenance schedules, furnace warning signs, humidity tips and more.",
+      desc="Practical heating and cooling advice for London, Ontario homeowners, maintenance schedules, furnace warning signs, humidity tips and more.",
       path="/blog/",
       schema_blocks=[schema_localbusiness(), schema_breadcrumb([("Home","/"),("Blog","/blog/")])])
     out += f'''
@@ -695,44 +695,44 @@ def build_blog_posts():
 def blog_bodies():
     return {
  "how-often-should-you-service-your-hvac-system-in-london-ontario": '''
-<p class="lead">Living in London, Ontario means dealing with real seasons. Winter can be bitterly cold, and summer near Lake Erie brings long stretches of heat and humidity. Your HVAC system doesn't get much of a break — which is exactly why regular maintenance matters.</p>
+<p class="lead">Living in London, Ontario means dealing with real seasons. Winter can be bitterly cold, and summer near Lake Erie brings long stretches of heat and humidity. Your HVAC system doesn't get much of a break, which is exactly why regular maintenance matters.</p>
 <p>At London HVAC Pros, we often hear the same question: <em>how often should I service my heating and cooling system?</em> Our answer is simple. At minimum, twice per year.</p>
 <h2>Why Regular HVAC Service Is So Important</h2>
 <p>Your furnace and air conditioner run for thousands of hours every year. Over time, dust builds up inside the system, filters get clogged, electrical connections loosen, and moving parts wear down. None of this happens overnight, which is why problems can go unnoticed until something suddenly stops working.</p>
 <p>When maintenance is skipped, homeowners often notice higher energy bills, uneven temperatures from room to room, poor airflow, or air that feels dusty and stale. Small issues that could have been corrected during a routine visit can turn into expensive repairs at the worst possible time.</p>
-<p>Regular service lets a technician catch those small concerns early. It keeps your system running efficiently and helps prevent breakdowns during peak heating or cooling season — when you need it most.</p>
+<p>Regular service lets a technician catch those small concerns early. It keeps your system running efficiently and helps prevent breakdowns during peak heating or cooling season, when you need it most.</p>
 <h2>The Ideal Service Schedule in Ontario</h2>
 <p>In our climate, servicing your HVAC system twice a year makes the most sense: once in the spring before summer arrives, and once in the fall before winter sets in.</p>
 <h3>Spring Air Conditioning Tune-Up</h3>
 <p>Before the hot weather hits London, your air conditioner should be inspected and cleaned. After sitting idle all winter, components may need attention. A spring tune-up ensures your system is ready to handle long, humid days without struggling.</p>
 <p>During a typical cooling service, a technician will check refrigerant levels, clean the outdoor condenser unit, inspect electrical components, test the thermostat, and make sure airflow is strong and balanced. When your AC is clean and properly adjusted, it cools your home more effectively and uses less energy to do it.</p>
 <h3>Fall Furnace Inspection</h3>
-<p>Before temperatures drop, your heating system should be checked for both performance and safety. In Canada, a reliable furnace isn't just about comfort — it's about protecting your home and family during freezing conditions.</p>
+<p>Before temperatures drop, your heating system should be checked for both performance and safety. In Canada, a reliable furnace isn't just about comfort, it's about protecting your home and family during freezing conditions.</p>
 <p>A fall heating inspection typically includes examining the heat exchanger, checking gas connections, testing ignition systems, cleaning burners, and ensuring there are no carbon monoxide concerns. Filters are replaced and airflow is verified, helping your furnace run safely throughout the winter.</p>
 <h2>The Long-Term Benefits</h2>
-<p>Homeowners who stay consistent with HVAC maintenance usually notice lower utility costs and fewer emergency repair calls. Systems that are properly maintained tend to last longer and perform better throughout their lifespan. There's also the benefit of better indoor air quality — clean components and fresh filters reduce dust circulation and help your home feel healthier.</p>
+<p>Homeowners who stay consistent with HVAC maintenance usually notice lower utility costs and fewer emergency repair calls. Systems that are properly maintained tend to last longer and perform better throughout their lifespan. There's also the benefit of better indoor air quality, clean components and fresh filters reduce dust circulation and help your home feel healthier.</p>
 <p>Think of HVAC maintenance the same way you think about servicing your vehicle. Routine care may seem small, but it plays a major role in avoiding larger problems later.</p>
 <h2>Don't Wait Until Something Fails</h2>
-<p>Many service calls happen in the middle of a heat wave or during a cold snap. By then, the system has already been under stress for weeks. Preventative maintenance is far more affordable — and far less stressful — than emergency repairs.</p>
+<p>Many service calls happen in the middle of a heat wave or during a cold snap. By then, the system has already been under stress for weeks. Preventative maintenance is far more affordable, and far less stressful, than emergency repairs.</p>
 <p>Scheduling service before each major season gives you peace of mind, knowing your system has been inspected, cleaned, and tested by a professional.</p>
 <h2>Book Your Service With London HVAC Pros</h2>
 <p>We're proud to serve homeowners throughout London and the surrounding Middlesex County area. We focus on honest service and long-term relationships with our customers. If it has been more than a year since your last HVAC service, now is the time to schedule.</p>
 ''',
  "signs-your-furnace-needs-repair-before-a-london-winter": '''
 <p class="lead">Winter in London, Ontario is serious business. When temperatures fall well below freezing and the wind comes off Lake Erie, your furnace becomes the heart of your home. It keeps your family warm, protects your plumbing from freezing, and makes everyday life comfortable.</p>
-<p>The problem is, many homeowners don't think about their furnace until it stops working — and by then, it's often the coldest week of the year. Catching early warning signs can help you avoid a complete heating failure when you need warmth the most.</p>
+<p>The problem is, many homeowners don't think about their furnace until it stops working, and by then, it's often the coldest week of the year. Catching early warning signs can help you avoid a complete heating failure when you need warmth the most.</p>
 <h2>1. Your Furnace Is Making Strange Noises</h2>
 <p>A properly working furnace should run relatively quietly. You might hear the gentle sound of air moving through vents or the system starting up, but loud or unusual noises are not normal.</p>
-<p>If you hear banging, squealing, rattling, or grinding, it could mean loose internal parts, motor issues, or airflow problems. Sometimes it's as simple as a worn belt or a loose panel; other times it points to something more serious inside the blower assembly or burner system. The key is not to ignore it — small mechanical issues can quickly turn into bigger, more expensive repairs.</p>
+<p>If you hear banging, squealing, rattling, or grinding, it could mean loose internal parts, motor issues, or airflow problems. Sometimes it's as simple as a worn belt or a loose panel; other times it points to something more serious inside the blower assembly or burner system. The key is not to ignore it, small mechanical issues can quickly turn into bigger, more expensive repairs.</p>
 <h2>2. Uneven Heating Around Your Home</h2>
 <p>Do you notice that some rooms feel warm while others stay cold? Uneven heating is one of the most common complaints we hear from homeowners in London.</p>
 <p>This may be caused by ductwork problems, restricted airflow, a struggling blower motor, or a thermostat that isn't reading temperatures accurately. Over time, these issues put extra strain on your furnace as it works harder to compensate. A professional inspection can pinpoint the cause and restore consistent heating throughout your home.</p>
 <h2>3. Your Energy Bills Are Suddenly Higher</h2>
-<p>If your heating bills jump significantly and the weather hasn't changed much, your furnace may be losing efficiency. When filters are clogged, burners are dirty, or internal components are worn, your system has to run longer to maintain the same temperature — and that extra runtime means higher costs.</p>
+<p>If your heating bills jump significantly and the weather hasn't changed much, your furnace may be losing efficiency. When filters are clogged, burners are dirty, or internal components are worn, your system has to run longer to maintain the same temperature, and that extra runtime means higher costs.</p>
 <p>Many homeowners assume rising bills are just part of winter in Ontario, but a sudden spike is often a sign your furnace needs attention.</p>
 <h2>4. Frequent Cycling On and Off</h2>
 <p>Does your furnace turn on, run briefly, then shut off, only to start again a few minutes later? This is known as short cycling.</p>
-<p>Short cycling can be caused by a dirty filter, thermostat issues, overheating, or improper airflow. Not only does it reduce comfort, it increases wear and tear on your system — repeatedly starting and stopping stresses components and can shorten the life of your furnace. Addressing it early can prevent larger breakdowns later in the season.</p>
+<p>Short cycling can be caused by a dirty filter, thermostat issues, overheating, or improper airflow. Not only does it reduce comfort, it increases wear and tear on your system, repeatedly starting and stopping stresses components and can shorten the life of your furnace. Addressing it early can prevent larger breakdowns later in the season.</p>
 <h2>5. Yellow Pilot Light on a Gas Furnace</h2>
 <p>If you have a gas furnace, the pilot flame should burn blue. A yellow or flickering flame may indicate improper combustion and, in some cases, a carbon monoxide risk.</p>
 <p>This is not something to ignore. If you notice a yellow flame or suspect a combustion issue, have your system inspected by a licensed professional right away. Safety should always come first.</p>
@@ -742,11 +742,11 @@ def blog_bodies():
 <p>At London HVAC Pros, we understand how important reliable heat is for your home and family. As a licensed, insured HVAC company, we provide fast, dependable furnace repair throughout London and nearby Middlesex County communities. If you've noticed any of these warning signs, don't wait for winter to put your system to the test.</p>
 ''',
  "why-your-air-conditioner-struggles-during-humid-london-summers": '''
-<p class="lead">If your air conditioner seems to run all day but your home still feels sticky and uncomfortable, you're not imagining it. Summers in London, Ontario aren't just hot — they're humid. Sitting close to Lake Erie, our area sees moisture levels that play a major role in how comfortable your home feels, even when the temperature looks fine.</p>
+<p class="lead">If your air conditioner seems to run all day but your home still feels sticky and uncomfortable, you're not imagining it. Summers in London, Ontario aren't just hot, they're humid. Sitting close to Lake Erie, our area sees moisture levels that play a major role in how comfortable your home feels, even when the temperature looks fine.</p>
 <p>Many homeowners assume their AC is failing when the real issue is excess moisture in the air. Understanding how your system works can help explain why it may be struggling.</p>
 <h2>Your Air Conditioner Does More Than Just Cool</h2>
 <p>An air conditioning system has two main jobs: it lowers the temperature and it removes moisture from the air. When humidity levels rise, your system has to work much harder to keep your home comfortable.</p>
-<p>High humidity makes the air feel heavier and warmer than it actually is. That's why 26 degrees on a dry day feels very different from 26 degrees during a humid stretch in July. When moisture levels are high, your AC runs longer cycles trying to pull that extra humidity out of the air — and if something isn't working properly, it may never quite catch up.</p>
+<p>High humidity makes the air feel heavier and warmer than it actually is. That's why 26 degrees on a dry day feels very different from 26 degrees during a humid stretch in July. When moisture levels are high, your AC runs longer cycles trying to pull that extra humidity out of the air, and if something isn't working properly, it may never quite catch up.</p>
 <h2>Common Reasons Your AC Can't Keep Up</h2>
 <p>Several issues can reduce your air conditioner's ability to handle both heat and humidity:</p>
 <ul class="bullets">
@@ -757,7 +757,7 @@ def blog_bodies():
   <li><strong>An undersized system.</strong> If the unit wasn't properly sized during installation, it may struggle during peak summer conditions in London.</li>
 </ul>
 <h2>The Impact of High Indoor Humidity</h2>
-<p>When humidity isn't controlled, your home can feel sticky even when the temperature seems reasonable. High moisture levels can also contribute to mold growth, musty odors, and added strain on your HVAC system. Over time, excessive humidity can even affect wood floors, furniture, and overall indoor air quality — which is why proper AC performance is about more than just comfort.</p>
+<p>When humidity isn't controlled, your home can feel sticky even when the temperature seems reasonable. High moisture levels can also contribute to mold growth, musty odors, and added strain on your HVAC system. Over time, excessive humidity can even affect wood floors, furniture, and overall indoor air quality, which is why proper AC performance is about more than just comfort.</p>
 <h2>How Professional AC Service Helps</h2>
 <p>Regular professional maintenance can make a significant difference during humid weather. A thorough air conditioning service typically includes cleaning the coils, checking refrigerant levels, testing airflow, calibrating the thermostat, and evaluating overall system performance. When the system is clean and properly adjusted, it cools faster, runs more efficiently, and maintains better indoor comfort.</p>
 <h2>Don't Let Your System Run Nonstop</h2>
@@ -770,7 +770,7 @@ def blog_bodies():
 # ============================================================ PRIVACY + 404
 def build_privacy():
     out = head(title=f"Privacy Policy | {SITE_NAME}",
-      desc="Privacy policy for London HVAC Pros — how we collect, use, and protect your personal information.",
+      desc="Privacy policy for London HVAC Pros, how we collect, use, and protect your personal information.",
       path="/privacy-policy/",
       schema_blocks=[schema_breadcrumb([("Home","/"),("Privacy Policy","/privacy-policy/")])])
     out += f'''
@@ -787,7 +787,7 @@ def build_privacy():
     <article class="article">
       <p class="lead">{SITE_NAME} ("we," "us," or "our") respects your privacy. This policy explains what information we collect when you use our website or request our services, and how we use and protect it.</p>
       <h2>Information We Collect</h2>
-      <p>When you submit a quote request or contact form, we collect the information you provide — such as your name, phone number, email address, service address, and a description of your heating or cooling needs. We may also collect basic, non-identifying analytics data about how visitors use our site.</p>
+      <p>When you submit a quote request or contact form, we collect the information you provide, such as your name, phone number, email address, service address, and a description of your heating or cooling needs. We may also collect basic, non-identifying analytics data about how visitors use our site.</p>
       <h2>How We Use Your Information</h2>
       <p>We use the information you provide to respond to your enquiry, schedule and deliver services, provide quotes, and follow up about your home comfort needs. We do not sell or rent your personal information to third parties.</p>
       <h2>How We Protect Your Information</h2>
