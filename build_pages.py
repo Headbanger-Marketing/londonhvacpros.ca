@@ -130,6 +130,40 @@ def service_photo(slug):
     return (f'<img class="svc-photo reveal" src="/assets/img/wp/{fn}" '
             f'width="{w}" height="{h}" loading="lazy" decoding="async" alt="{alt}">')
 
+def link_brand_home(html):
+    """Give a page one in-body branded link to the homepage (the money page):
+    turn the FIRST prose occurrence of the brand name into a link to '/'.
+    Checks the &amp; (HTML-escaped) form first so it matches body prose, not the raw-& H1."""
+    for brand in (SHORT_NAME, SITE_NAME):
+        i = html.find(brand)
+        if i != -1:
+            return f'{html[:i]}<a href="/">{brand}</a>{html[i+len(brand):]}'
+    return html
+
+def related_service(p):
+    """Most relevant service page for a blog post, matched on slug+title keywords.
+    Reads the SERVICES list so it adapts to each site's own service mix.
+    Returns (url, label)."""
+    hay = (p["slug"] + " " + p["title"]).lower()
+    hints = [
+        ("ductless","ductless-ac"), ("heat pump","heat-pump"), ("heat-pump","heat-pump"),
+        ("furnace","furnace"), ("boiler","furnace"), ("heating","furnace"),
+        ("air conditioner","ac-repair"), ("air-condition","ac-repair"), ("cooling","ac-repair"),
+        ("humid","ac-repair"), ("summer","ac-repair"),
+        ("duct","duct-cleaning"), ("air quality","duct-cleaning"),
+        ("thermostat","thermostat"), ("fireplace","fireplace"),
+        # generic HVAC/maintenance posts (no specific-equipment keyword) fall to the
+        # flagship heating service rather than the /services/ hub. Kept LAST so any
+        # specific match above wins first.
+        ("hvac","furnace"), ("maintenance","furnace"), ("service","furnace"),
+    ]
+    for kw, shint in hints:
+        if kw in hay:
+            for s in SERVICES:
+                if shint in s["slug"]:
+                    return (f'/services/{s["slug"]}/', s["nav"].replace("&amp;","&"))
+    return ("/services/", "HVAC service")
+
 REVIEW_POOL = [
   ("They had our furnace running again the same day, on one of the coldest nights of the year. Fast and professional.","Mya C.","London"),
   ("Fixed the problem quickly and explained everything clearly. Great service from start to finish.","Daniel P.","St. Thomas"),
@@ -183,7 +217,7 @@ def build_service(slug, data):
     {crumbs([("Home","/"),("Services","/services/"),(nav_label,"")])}
     <span class="eyebrow on-dark">{data["kicker"]}</span>
     <h1>{SITE_NAME}, {data["h1"]}</h1>
-    <p>{data["intro"]}</p>
+    <p>{link_brand_home(data["intro"])}</p>
     <div class="page-hero__cta">
       <a class="btn btn-primary btn-lg" href="#quote">Get a Free Quote</a>
       <a class="btn btn-ghost-light btn-lg" href="/services/">All Services</a>
@@ -480,7 +514,7 @@ def build_about():
       <div class="reveal">
         <span class="eyebrow">Our Story</span>
         <h2>People Over Profits, Season After Season</h2>
-        <p>At London HVAC Pros, we believe every household deserves a comfortable, healthy home. As an HVAC company based in London, Ontario, our mission is simple: keep your home comfortable through every season with the same high standard of care we'd expect for our own households.</p>
+        <p>At <a href="/">London HVAC Pros</a>, we believe every household deserves a comfortable, healthy home. As an HVAC company based in London, Ontario, our mission is simple: keep your home comfortable through every season with the same high standard of care we'd expect for our own households.</p>
         <p>Our journey began with one goal, to provide honest, transparent home services that put people first. We know that when your furnace or air conditioner fails, it's more than an inconvenience; it's a disruption to your family's peace of mind. That's why we've built our reputation on being a reliable HVAC company that delivers tailored solutions with a personal touch.</p>
       </div>
       <div class="split__media reveal d1">
@@ -538,7 +572,7 @@ def build_contact():
     {crumbs([("Home","/"),("Contact","")])}
     <span class="eyebrow on-dark">Contact Us</span>
     <h1>Let's Get Your Comfort Back on Track</h1>
-    <p>Is your air conditioner making a strange noise? Ready to upgrade your furnace before winter? Whatever your home comfort need, the London HVAC Pros team is ready to help, without the stress.</p>
+    <p>Is your air conditioner making a strange noise? Ready to upgrade your furnace before winter? Whatever your home comfort need, the <a href="/">London HVAC Pros</a> team is ready to help, without the stress.</p>
   </div>
 </section>
 
@@ -658,6 +692,8 @@ def build_blog_index():
     write("/blog/", out)
 
 def article_shell(p, body_html):
+    body_html = link_brand_home(body_html)   # one in-body branded link to the homepage
+    rsvc = related_service(p)                 # topical link from the post to its service page
     related = [x for x in BLOG if x["slug"]!=p["slug"]]
     rel_cards = build_blog_cards(related, limit=2)
     url=f"/blog/{p['slug']}/"
@@ -682,7 +718,7 @@ def article_shell(p, body_html):
       {body_html}
       <div class="note-banner" style="margin-top:30px;background:var(--bg-alt);border:1px solid var(--line);color:var(--body)">
         <strong style="color:var(--navy-900)">Need help now?</strong>
-        <a href="/contact/">Request a free quote</a> and a London technician will get back to you fast. We're here 24/7.
+        For professional <a href="{rsvc[0]}">{rsvc[1]} in {CITY}</a>, our team is ready to help. <a href="/contact/">Request a free quote</a> and a London technician will get back to you fast. We're here 24/7.
       </div>
     </article>
   </div>

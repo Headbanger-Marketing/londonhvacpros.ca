@@ -690,6 +690,8 @@ textarea { resize: vertical; min-height: 100px; }
 }
 .page-hero h1 { color: #fff; max-width: 760px; }
 .page-hero p { color: #b9cee2; max-width: 680px; font-size: 1.14rem; margin-top: 16px; }
+.page-hero p a { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
+.page-hero p a:hover { opacity: .85; }
 .crumbs {
   display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
   font-size: .88rem; margin-bottom: 20px; color: #8fb0cf;
