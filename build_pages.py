@@ -591,6 +591,9 @@ BLOG = [
   "title":"How Often Should You Service Your HVAC System in London, Ontario?",
   "seo_title":"How Often to Service Your HVAC in London, ON",
   "date":"2026-01-12","date_h":"January 12, 2026","img":"cool","icon":"calendar",
+  "photo":"/assets/img/blog/how-often-should-you-service-your-hvac-system-in-london-ontario.jpg",
+  "photo_h":1067,
+  "photo_alt":"HVAC technician inspecting an outdoor air conditioning unit during a maintenance visit",
   "excerpt":"London's real seasons push your HVAC system hard. Here's how often you should service your furnace and AC, and why twice a year is the sweet spot.",
   "meta":"How often should you service your HVAC system in London, Ontario? Learn the ideal furnace and AC maintenance schedule for our climate from local experts.",
   "body":None},
@@ -598,6 +601,9 @@ BLOG = [
   "title":"Signs Your Furnace Needs Repair Before a London Winter",
   "seo_title":"Signs Your Furnace Needs Repair Before Winter",
   "date":"2026-02-15","date_h":"February 15, 2026","img":"warm","icon":"flame",
+  "photo":"/assets/img/blog/signs-your-furnace-needs-repair-before-a-london-winter.jpg",
+  "photo_h":1067,
+  "photo_alt":"Technician servicing the internal components of a home heating system",
   "excerpt":"Don't wait for the coldest night of the year. Here are the most common warning signs your furnace needs repair before a London winter sets in.",
   "meta":"Five warning signs your furnace needs repair before a London, Ontario winter, strange noises, uneven heat, rising bills and more. Stay warm and safe.",
   "body":None},
@@ -605,6 +611,9 @@ BLOG = [
   "title":"Why Your Air Conditioner Struggles During Humid London Summers",
   "seo_title":"Why Your AC Struggles in Humid London Summers",
   "date":"2026-03-09","date_h":"March 9, 2026","img":"cool","icon":"droplets",
+  "photo":"/assets/img/blog/why-your-air-conditioner-struggles-during-humid-london-summers.jpg",
+  "photo_h":1137,
+  "photo_alt":"Technician repairing an outdoor air conditioner unit with a manifold gauge",
   "excerpt":"If your AC runs all day but your home still feels sticky, humidity is likely the culprit. Here's why, and what you can do about it.",
   "meta":"Why does your air conditioner struggle in humid London summers? Learn how humidity affects cooling and what AC service near Lake Erie can do to help.",
   "body":None},
@@ -614,7 +623,7 @@ def build_blog_cards(posts, limit=3):
     out=""
     for p in posts[:limit]:
         out += f'''<article class="post-card reveal">
-  <div class="post-card__img {p["img"]}">{icon(p["icon"],size=54)}</div>
+  <img class="post-card__img" src="{p["photo"]}" alt="{p["photo_alt"]}" width="400" height="180" loading="lazy" decoding="async">
   <div class="post-card__body">
     <span class="tag">Home Comfort Tips</span>
     <h3>{p["title"]}</h3>
@@ -654,6 +663,7 @@ def article_shell(p, body_html):
     url=f"/blog/{p['slug']}/"
     seo_title = p.get("seo_title", p["title"])  # concise <title> (<=60 chars); H1 keeps full headline
     out = head(title=seo_title, desc=p["meta"], path=url, og_type="article",
+      og_image=f"{DOMAIN}{p['photo']}",
       schema_blocks=[schema_localbusiness(),
                      schema_breadcrumb([("Home","/"),("Blog","/blog/"),(p["title"], url)]),
                      schema_blogpost(p["title"], p["meta"], url, p["date"])])
@@ -667,7 +677,9 @@ def article_shell(p, body_html):
 </section>
 <section class="section">
   <div class="container">
-    <article class="article reveal">{body_html}
+    <article class="article reveal">
+      <img class="svc-photo" src="{p["photo"]}" alt="{p["photo_alt"]}" width="1600" height="{p["photo_h"]}" loading="eager" decoding="async" style="margin-bottom:30px">
+      {body_html}
       <div class="note-banner" style="margin-top:30px;background:var(--bg-alt);border:1px solid var(--line);color:var(--body)">
         <strong style="color:var(--navy-900)">Need help now?</strong>
         <a href="/contact/">Request a free quote</a> and a London technician will get back to you fast. We're here 24/7.

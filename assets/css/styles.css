@@ -750,6 +750,7 @@ textarea { resize: vertical; min-height: 100px; }
 .post-card__img.warm { background: linear-gradient(150deg, var(--accent), var(--accent2)); color: #fff; }
 .post-card__img.cool { background: linear-gradient(150deg, var(--primary), var(--navy)); color: var(--accent); }
 .post-card__img svg { width: 56px; height: 56px; opacity: .85; }
+img.post-card__img { width: 100%; object-fit: cover; display: block; }
 .post-card__body { padding: 26px; display: flex; flex-direction: column; flex: 1; }
 .post-card__body .tag {
   font-size: .78rem; color: var(--accent2); font-weight: 700;
