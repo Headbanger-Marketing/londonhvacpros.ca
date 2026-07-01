@@ -199,7 +199,7 @@ def build_service(slug, data):
     revs = "".join(review_card(*REVIEW_POOL[i]) for i in data["rev"])
     breadcrumb_items = [("Home","/"),("Services","/services/"),(nav_label, url)]
 
-    nav_plain = nav_label.replace("&amp;", "&")
+    nav_plain = nav_label  # keep &amp; (valid in <title>, renders as &)
     title = f"{nav_plain} in {CITY}, ON | {SITE_NAME}"
     if len(title) > 60:
         title = f"{nav_plain} | {CITY}, ON"
@@ -330,7 +330,7 @@ def build_home():
   <div class="container">
     <div class="hero__copy reveal">
       <span class="eyebrow on-dark">{CITY}'s High-Efficiency HVAC Installers</span>
-      <h1>London HVAC Pros, New Furnace, AC &amp; Heat Pump Installs in <span class="accent">{CITY}, ON</span></h1>
+      <h1>New Furnace, AC &amp; Heat Pump Installs in <span class="accent">{CITY}, ON</span></h1>
       <p class="hero__sub">{SITE_NAME} designs and installs high-efficiency heating and cooling systems for homes across {CITY}, Ontario and {COUNTY}. Right-sized equipment, certified workmanship, and the rebate guidance to make the upgrade pay off.</p>
       <div class="hero__cta">
         <a class="btn btn-primary btn-lg" href="#quote">Get a Free Quote</a>
