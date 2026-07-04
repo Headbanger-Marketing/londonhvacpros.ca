@@ -79,6 +79,16 @@
     reveals.forEach(function (el) { el.classList.add("in"); });
   }
 
+  /* ---- Hide sticky mobile call bar while a quote form is on screen ---- */
+  var mbar = d.querySelector(".mobile-bar");
+  var qform = d.querySelector("form[data-quote-form]");
+  if (mbar && qform && "IntersectionObserver" in window) {
+    var mbio = new IntersectionObserver(function (entries) {
+      mbar.classList.toggle("is-hidden", entries[0].isIntersecting);
+    }, { threshold: 0.2 });
+    mbio.observe(qform);
+  }
+
   /* ---- Footer year ---- */
   d.querySelectorAll("[data-year]").forEach(function (el) {
     el.textContent = new Date().getFullYear();

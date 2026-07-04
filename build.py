@@ -121,7 +121,7 @@ def nav_links(active=""):
       </div>
       <a class="nav__link" href="/contact/"{cur('contact')}>Contact</a>
       <div class="nav__cta">
-        <a class="btn btn-primary" href="/contact/">Get a Free Quote</a>
+        <a class="btn btn-primary" href="/contact/#quote">Get a Free Quote</a>
       </div>'''
 
 def header(active=""):
@@ -188,7 +188,7 @@ def footer():
   </div>
 </footer>
 <div class="mobile-bar mobile-bar--single">
-  <a class="btn btn-primary" href="/contact/">{icon('send',size=18)} Get a Free Quote</a>
+  <a class="btn btn-primary" href="/contact/#quote">{icon('send',size=18)} Get a Free Quote</a>
 </div>
 <script src="/assets/js/main.js" defer></script>'''
 
@@ -371,7 +371,7 @@ def cta_band(title="Ready to Restore Your Home Comfort?",
           <p>{text}</p>
         </div>
         <div style="display:flex;gap:14px;flex-wrap:wrap">
-          <a class="btn btn-primary btn-lg" href="/contact/">Get a Free Quote</a>
+          <a class="btn btn-primary btn-lg" href="/contact/#quote">Get a Free Quote</a>
         </div>
       </div>
     </div>

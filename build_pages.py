@@ -469,7 +469,7 @@ def build_services_index():
     <h1>Complete HVAC Services for London Homes</h1>
     <p>From emergency repairs to new installations and seasonal maintenance, we keep your home comfortable in every season. Explore our full range of heating, cooling, and air-quality services below.</p>
     <div class="page-hero__cta">
-      <a class="btn btn-primary btn-lg" href="/contact/">Get a Free Quote</a>
+      <a class="btn btn-primary btn-lg" href="/contact/#quote">Get a Free Quote</a>
       <a class="btn btn-ghost-light btn-lg" href="/about/">Why Choose Us</a>
     </div>
   </div>
@@ -718,7 +718,7 @@ def article_shell(p, body_html):
       {body_html}
       <div class="note-banner" style="margin-top:30px;background:var(--bg-alt);border:1px solid var(--line);color:var(--body)">
         <strong style="color:var(--navy-900)">Need help now?</strong>
-        For professional <a href="{rsvc[0]}">{rsvc[1]} in {CITY}</a>, our team is ready to help. <a href="/contact/">Request a free quote</a> and a London technician will get back to you fast. We're here 24/7.
+        For professional <a href="{rsvc[0]}">{rsvc[1]} in {CITY}</a>, our team is ready to help. <a href="/contact/#quote">Request a free quote</a> and a London technician will get back to you fast. We're here 24/7.
       </div>
     </article>
   </div>

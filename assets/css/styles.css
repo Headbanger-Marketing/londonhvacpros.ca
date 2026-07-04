@@ -851,6 +851,10 @@ img.post-card__img { width: 100%; object-fit: cover; display: block; }
   body { padding-bottom: 72px; }
 }
 
+/* Hide the sticky call bar while a quote form is on screen (the form is right there) */
+.mobile-bar { transition: transform .28s ease, opacity .28s ease; }
+.mobile-bar.is-hidden { transform: translateY(130%); opacity: 0; pointer-events: none; }
+
 /* ---------- Reveal animation ---------- */
 .js .reveal {
   opacity: 0; transform: translateY(24px);
