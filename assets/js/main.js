@@ -135,7 +135,7 @@
         if (status) {
           status.className = "form-status " + (ok ? "ok" : "err");
           status.textContent = ok
-            ? "✓ Thank you! Your request has been received — a local technician will get back to you shortly."
+            ? "✓ Thank you! Your request has been received. A local technician will get back to you shortly."
             : "We couldn't submit your request. Please email contact@londonhvacpros.ca and we'll respond right away.";
         }
         if (ok) form.reset();

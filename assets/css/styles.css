@@ -1,26 +1,26 @@
 :root {
   /* Brand palette */
-  --navy: #292320;
-  --navy-light: #3a3330;
-  --primary: #c2410c;
-  --accent: #4d7c0f;
-  --accent2: #3f6212;
-  --light-bg: #fff7ed;
-  --body: #5c4033;
-  --card-bg: #f7fee7;
-  --warm-gradient: rgba(77,124,15,0.1);
+  --navy: #0f2544;
+  --navy-light: #1c3f66;
+  --primary: #2563eb;
+  --accent: #0369a1;
+  --accent2: #075985;
+  --light-bg: #eaf3fb;
+  --body: #3c4a5c;
+  --card-bg: #f3f8fc;
+  --warm-gradient: rgba(37,99,235,0.10);
 
   /* System tokens */
-  --ink: #0c0a09;
-  --muted: #2e2019;
+  --ink: #0d0909;
+  --muted: #47566a;
   --muted-light: #8b9aad;
   --line: #e4eaf0;
   --line-2: #d2dbe5;
   --surface: #ffffff;
-  --bg: #fffcf9;
-  --bg-alt: #fffbf6;
-  --success: #1f9d62;
-  --star: #f5a623;
+  --bg: #f7fafd;
+  --bg-alt: #f1f6fb;
+  --success: #15803d;
+  --star: #b45309;
   --error: #c0392b;
 
   /* Type */
@@ -88,7 +88,7 @@ p { margin: 0 0 1rem; }
   margin-bottom: 14px;
 }
 .eyebrow::before { content:""; width: 28px; height: 2.5px; background: var(--accent); border-radius: 2px; }
-.eyebrow.on-dark { color: var(--accent); opacity: .9; }
+.eyebrow.on-dark { color: #7dd3fc; opacity: 1; }
 
 /* ---------- Layout helpers ---------- */
 .container { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
@@ -344,9 +344,21 @@ p { margin: 0 0 1rem; }
 }
 .hero h1 { color: #fff; }
 .hero h1 .accent {
-  background: linear-gradient(120deg, var(--accent), var(--accent2));
+  /* Gradient between two lightened variants of --accent so both endpoints
+     pass WCAG AA-large (>=3.0) against var(--navy) on every site. The old
+     rule (accent -> accent2) was invisible on most sites because accent2
+     was nearly identical to navy. */
+  background: linear-gradient(120deg, color-mix(in srgb, var(--accent), white 55%), color-mix(in srgb, var(--accent), white 30%));
   -webkit-background-clip: text; background-clip: text;
   color: transparent;
+}
+/* Browsers without color-mix support (older Safari): fall back to solid accent. */
+@supports not (background: color-mix(in srgb, red, white)) {
+  .hero h1 .accent {
+    background: none;
+    -webkit-text-fill-color: var(--accent);
+    color: var(--accent);
+  }
 }
 .hero__sub {
   font-size: 1.2rem; color: #b9cee2;
@@ -688,6 +700,24 @@ textarea { resize: vertical; min-height: 100px; }
   background-image: radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px);
   background-size: 22px 22px; opacity: .4;
 }
+/* Variant: hero with a background image (service pages). Image is darkened
+   heavily so white text stays readable. */
+.page-hero--with-bg {
+  background: var(--navy);
+}
+.page-hero--with-bg::before {
+  content: ""; position: absolute; inset: 0;
+  background-image: var(--hero-bg-url);
+  background-size: cover;
+  background-position: center;
+  opacity: .35;
+}
+.page-hero--with-bg::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(8,30,55,.55) 0%, rgba(8,30,55,.85) 100%);
+  background-image: none;
+  opacity: 1;
+}
 .page-hero .container {
   position: relative; z-index: 2;
   padding-block: clamp(46px, 5vw, 72px);
@@ -795,16 +825,16 @@ img.post-card__img { width: 100%; object-fit: cover; display: block; }
 .info-card a:hover { color: var(--accent); }
 
 /* ---------- Footer ---------- */
-.site-footer { background: var(--navy); color: #9fb4ca; padding-top: clamp(52px, 6vw, 72px); }
+.site-footer { background: var(--navy); color: #9fb4ca; padding-top: clamp(40px, 5vw, 58px); }
 .footer-grid {
   display: grid;
   grid-template-columns: 1.5fr 1fr 1.2fr 1.2fr;
-  gap: 38px; padding-bottom: 48px;
+  gap: 30px; padding-bottom: 34px;
 }
-@media (max-width: 900px){ .footer-grid { grid-template-columns: 1fr 1fr; gap: 34px; } }
+@media (max-width: 900px){ .footer-grid { grid-template-columns: 1fr 1fr; gap: 26px; } }
 @media (max-width: 520px){ .footer-grid { grid-template-columns: 1fr; } }
 .footer-brand .brand__name { color: #fff; }
-.footer-about { margin: 18px 0; font-size: .96rem; max-width: 340px; line-height: 1.6; }
+.footer-about { margin: 14px 0; font-size: .96rem; max-width: 340px; line-height: 1.6; }
 .footer-social { display: flex; gap: 10px; }
 .footer-social a {
   width: 42px; height: 42px; border-radius: var(--r-sm);
@@ -815,13 +845,13 @@ img.post-card__img { width: 100%; object-fit: cover; display: block; }
 .footer-social svg { width: 19px; height: 19px; }
 .site-footer h4 {
   color: #fff; font-size: .84rem; letter-spacing: .1em;
-  text-transform: uppercase; margin-bottom: 20px;
+  text-transform: uppercase; margin-bottom: 14px;
 }
-.footer-links { display: grid; gap: 12px; }
+.footer-links { display: grid; gap: 7px; }
 .footer-links a { color: #9fb4ca; font-size: .96rem; transition: color .15s ease; }
-.footer-links a:hover { color: var(--accent); }
+.footer-links a:hover { color: #7dd3fc; }
 .footer-contact li {
-  display: flex; gap: 12px; margin-bottom: 16px;
+  display: flex; gap: 12px; margin-bottom: 9px;
   font-size: .96rem; align-items: flex-start;
 }
 .footer-contact svg {
@@ -831,7 +861,7 @@ img.post-card__img { width: 100%; object-fit: cover; display: block; }
 .footer-contact a { color: #cfe0f0; font-weight: 600; }
 .footer-bottom {
   border-top: 1px solid rgba(255,255,255,.08);
-  padding: 24px 0; display: flex; align-items: center;
+  padding: 16px 0; display: flex; align-items: center;
   justify-content: space-between; gap: 14px; flex-wrap: wrap;
   font-size: .9rem;
 }
