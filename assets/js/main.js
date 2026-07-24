@@ -136,7 +136,7 @@
           status.className = "form-status " + (ok ? "ok" : "err");
           status.textContent = ok
             ? "✓ Thank you! Your request has been received. A local technician will get back to you shortly."
-            : "We couldn't submit your request. Please email contact@londonhvacpros.ca and we'll respond right away.";
+            : "We couldn't submit your request. Please email contact@londonheatingcooling.ca and we'll respond right away.";
         }
         if (ok) form.reset();
         if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || "Submit"; }

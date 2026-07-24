@@ -1,15 +1,24 @@
-# London HVAC Pros
+# londonhvacpros.ca
 
-> London HVAC Pros is a licensed HVAC company in London, Ontario that specializes in installing high-efficiency furnaces, air conditioners, and heat pumps, with rebate guidance and right-sized system design. Phone: (519) 679-4530.
+> londonhvacpros.ca is a local HVAC company serving Ontario, Ontario, Ontario, offering furnace repair, AC repair, ductless mini-split installation, heat pump repair and installation, fireplace installation, thermostat repair, and duct cleaning to homeowners across the region.
 
-## Pages
-- [Home](https://londonhvacpros.ca/): High-efficiency HVAC installation in London, ON
-- [Services](https://londonhvacpros.ca/services/): Furnace, AC, heat pump, ductless, fireplace, thermostat, and duct services
-- [About](https://londonhvacpros.ca/about/): Who we are and how we work
-- [Contact](https://londonhvacpros.ca/contact/): Free quotes and service requests
+Phone:   |  Email: contact@londonhvacpros.ca  |  Website: https://londonhvacpros.ca
 
-## Key services
-- [Furnace Installation & Repair](https://londonhvacpros.ca/services/furnace-repair/)
-- [AC Installation & Repair](https://londonhvacpros.ca/services/ac-repair/)
-- [Heat Pump Installation](https://londonhvacpros.ca/services/heat-pump-repair-installation/)
-- [Ductless Mini-Split Installation](https://londonhvacpros.ca/services/ductless-ac-installation/)
+## Key pages
+
+- [Home](https://londonhvacpros.ca/): londonhvacpros.ca homepage with service overview and FAQ
+- [About](https://londonhvacpros.ca/about/): About the company and service area
+- [Contact](https://londonhvacpros.ca/contact/): Request a free quote or service call
+
+## Services
+
+- [Furnace Installation & Repair](https://londonhvacpros.ca/services/furnace-repair/): Furnace Installation & Repair in Ontario, Ontario
+- [AC Installation & Repair](https://londonhvacpros.ca/services/ac-repair/): AC Installation & Repair in Ontario, Ontario
+- [Heat Pumps](https://londonhvacpros.ca/services/heat-pump-repair-installation/): Heat Pumps in Ontario, Ontario
+- [Duct Cleaning](https://londonhvacpros.ca/services/duct-cleaning/): Duct Cleaning in Ontario, Ontario
+- [Thermostats](https://londonhvacpros.ca/services/thermostat-repair-replacement/): Thermostats in Ontario, Ontario
+- [Ductless AC Installation](https://londonhvacpros.ca/services/ductless-ac-installation/): Ductless AC Installation in Ontario, Ontario
+
+## FAQ
+
+Common questions about HVAC service in Ontario are answered on the homepage.
